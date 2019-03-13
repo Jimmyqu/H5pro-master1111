@@ -1,0 +1,344 @@
+#app{
+    background-color: rebeccapurple;
+    height: 100vh;
+    background: url('../img/Path 14 Copy.png') no-repeat ;
+    background-size: cover;
+}
+.header{
+    height: 8vh;
+    line-height: 8vh;
+    padding: 0 3vw;
+    display: flex;
+    justify-content: space-between
+}
+.header-timer{
+    background: url('../img/时间@3x.png') no-repeat 5px;
+    color: #1F9A4B;
+    background-size: 20%;
+    width: 18vw;
+    font-size: 0.3rem;
+    border-radius: .5rem;
+    height: 6vh;
+    line-height: 6vh;
+    padding-left: 7vw;
+    margin-top:1vh ;
+    background-color: rgba(255, 255, 255, 0.3)
+}
+.header-btns{
+    font-size: .4rem;
+    width: 25vw;
+    height: 6vh;
+    margin-top: 1vh;
+    display: flex;
+    justify-content: space-between
+}
+.header-btns-l{
+    color: #1F9A4B;
+    width: 5vh;
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 2vh;
+}
+.header-btns-r{
+    background: url('../img/Combined\ Shape@3x.png') no-repeat center;
+    background-size: 60%;
+    width: 5vh;
+    height: 5vh;
+    line-height: 5vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    border-radius: 50%;
+    animation: loops infinite 1s;
+}
+
+.stop {
+    animation-play-state: paused;
+}
+
+/* 拼图 */
+.main{
+    height: 8rem;
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.main:after{
+    content: "";
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/img01.png') no-repeat center;
+    background-size: 60%;
+    opacity: .5;
+}
+
+
+/* 图片列表 */
+.img-container{
+    border-radius:0 0 10px 10px ;
+    width: 80vw;
+    height: 15vh;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.img-items{
+    width: 30vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.img-items img{
+   position: absolute;
+   bottom: -14vh;
+}
+
+/* 按钮 */
+.btn-container{
+    width: 80vw;
+    margin: 16vh auto 0 auto;
+    height: 6vh;
+    line-height: 6vh;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-container div{
+    width:35vw ;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-size: 3vh;
+    text-align: center;
+    color: azure;
+    border-radius: 10px;
+}
+
+
+/* 弹窗 */
+#dialog{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+#cityInfo{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../img/Path 14 Copy.png') no-repeat ;
+    background-size: cover;
+    z-index:1;
+    color: white;
+} 
+
+#cityInfo>div{
+    padding: 2vh;
+    z-index: 3;
+    width: 86vw;
+    height: 91vh;
+    border:1px seashell solid;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+#cityInfo:after{ 
+    content: ""; 
+    width:100%; 
+    height:100%; 
+     position: absolute;
+     left:0; 
+     top:0; 
+     background: inherit;
+     filter: blur(.2rem);
+     z-index: 2; 
+  }
+
+  
+#cityInfo #closeBtn{
+    text-align: right;
+    font-size: 3vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 3vh transparent solid;
+    border-right-color: white;
+    border-top-color: white;
+    opacity: .5;
+}
+#cityInfo #closeBtn:after{
+    content: 'x';
+    position: absolute;
+    top: -3vh;
+    color: grey
+}
+
+#ruleInfo{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../img/Path 14 Copy.png') no-repeat ;
+    background-size: cover;
+    z-index:1;
+    color: white;
+}
+#ruleInfo>div{
+    padding: 2vh;
+    z-index: 3;
+    width: 86vw;
+    height: 91vh;
+    border:1px seashell solid;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+#ruleInfo:after{ 
+    content: ""; 
+    width:100%; 
+    height:100%; 
+     position: absolute;
+     left:0; 
+     top:0; 
+     background: inherit;
+     filter: blur(.2rem);
+     z-index: 2; 
+  }
+
+ #ruleInfo>div .ruleInfo-title{
+      background-color: rgba(255, 255, 255, 0.3);
+      padding: .3rem 0;
+      border-radius: 6px;
+  }
+ #ruleInfo>div>span{
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    font-size: .5rem;
+    margin-left: -6px;
+    width: 5vh;
+    height: 5vh;
+    text-align: center;
+    line-height: 5vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    opacity: .3;
+    border-radius: 50%;
+  }
+  #ruleInfo>div>p{
+        margin: .4rem 0;
+      font-size: .3rem;
+      line-height: 1.5
+  }
+  .ruleInfo-title p{
+      text-align: center;
+      margin: .2rem 0;
+  }
+  .ruleInfo-title :nth-child(1){
+      font-size: .4rem
+  }
+  .ruleInfo-title :nth-child(2){
+    font-size: .55rem
+} */
+.rangking{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.rangking-item{
+    width: 90vw;
+    height: 72vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+   overflow: scroll
+}
+.rangking-item ul{
+    height: 1200px;
+}
+.dialog-item{
+    width: 80vw;
+    height: 80vw;
+    background-color: whitesmoke
+}
+
+@keyframes loops{
+    0% {
+        transform: rotate(0deg)
+    }
+    10% {
+        transform: rotate(36deg)
+    }
+    20% {
+        transform: rotate(72deg)
+    }
+    30% {
+        transform: rotate(108deg)
+    }
+    40% {
+        transform: rotate(144deg)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    60% {
+        transform: rotate(216deg)
+    }
+    70% {
+        transform: rotate(252deg)
+    }
+    80% {
+        transform: rotate(288deg)
+    }
+    90% {
+        transform: rotate(324deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+    
+}
+.main {
+    position: relative
+}
+/* 拼图位置 */
+.main .main-item{
+    font-size: 0rem;
+    text-align: center;
+    /* background-color: fuchsia; */
+    z-index: 1;
+}
+.pullz{
+    position: absolute;
+}
+
+
+/* @media screen and (min-width: 768px){
+    .pullz2{
+        background-color: black !important;
+        position: absolute;
+        top:27%;
+        left:28vw ;
+    }
+} */

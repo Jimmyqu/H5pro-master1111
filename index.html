@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+    (function(doc, win) {
+    var docEl = doc.documentElement,
+        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+        dpr = 1,
+        scale = 1 / dpr,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        docEl.dataset.dpr = dpr;
+        var metaEl = doc.createElement('meta');
+        metaEl.name = 'viewport';
+        metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+        docEl.firstElementChild.appendChild(metaEl);
+        var recalc = function() {
+            var width = docEl.clientWidth;
+            if (width / dpr > 750) {
+                width = 750 * dpr;
+            }
+            // 乘以100，px : rem = 100 : 1
+            docEl.style.fontSize = 100 * (width / 750) + 'px';
+        };
+        recalc()
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);
+</script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <title>Document</title>
+</head>
+<body >  
+    <div id="app">
+        <audio ref='audio' style="display:none"  controls="controls"loop="loop" preload="auto"
+            src="resources/bgm.mp3">
+        </audio>
+        <div class="header">
+            <div class="header-timer">
+                {{outputTime}}
+            </div>
+            <div class="header-btns">
+                <div class="header-btns-l" @click="ruleInfoShow=true">
+                        规则 
+                </div>
+                <div ref='bgmBtn' class="header-btns-r" @click="handleBgm">
+                </div>
+            </div>
+        </div>
+        <div class="main" ref='main' style="width: 80vw;">
+            <img v-for="item in doneList" :src="item.src"
+                 :style="{
+                    position: 'absolute',
+                    top:item.style[3]+'%',
+                    left:item.style[2]+'%',
+                    width: item.style[1]+'%',
+                    height:item.style[0]+'%',
+                }"
+                 alt="">
+            <div style="height:8.05rem">
+                 <div  :ref="'target'+i.id"   class="main-item pullz" :style="{
+                    top:i.pos[0]+'%',
+                    left:i.pos[1]+'%',
+                    width:i.pos[2]+'vw',
+                    height:i.pos[3]+'vw',
+                }"  v-for="i in cityInfo" @click="doneList.length==18&&showDetail(i.id)">
+                    {{i.id}}
+                </div>
+            </div>
+
+            <div class="img-container">
+                <div  class="img-items" v-for="i in 3" >
+                    <!--v-show="index==listIndex"-->
+                    <!--display:doneList.includes(img)?'block':'none'-->
+                    <img 
+                    v-for="img,index in initList.slice((i-1)*6,i*6)"
+                    v-show="index==listIndex"
+
+                    :style="{
+                        height:img.style[0]+'%',
+                        width:img.style[1]+'%',
+
+                    }"
+                    :ref="'img'+img.id"  
+                    @touchstart="start($event,img.id)" 
+                    @touchend="stop($event,img.id)"
+                    @touchmove="move($event,img)"
+                    :src="img.src" alt="">
+                </div>
+            </div>
+
+        </div>
+        <div class="btn-container">
+            <div class="btn-l" @click="statrGame">
+                开始拼图
+            </div>
+            <div class="btn-r" @click="toggleRanking" >
+                {{rangking?'返回主页':'好拼排行'}}
+            </div>
+        </div>
+       
+        <div id="cityInfo" v-show='cityInfoShow'>
+            <div>
+                <span id='closeBtn' @click="cityInfoShow=false" ></span>
+                <p style="font-size:3vh;padding:2vh 0;">
+                    <span style=" background-color: rgba(255, 255, 255, 0.3);padding:1vh 3vh;border-radius:.5rem">{{cityItem.name}}</span>
+                </p>
+                <p style="font-size:2.2vh;line-height: 1.5" v-html="cityItem.info">
+                </p>
+            </div>
+        </div>
+        <div id="ruleInfo" v-show='ruleInfoShow'>
+            <div >
+                <div class="ruleInfo-title">
+                    <p>乡村振兴 黄陂好拼</p>
+                    <p>拼图规则</p>
+                </div>
+                <p>
+                  在黄陂，你可以感受到都市发展的高速度，也可以题为乡味悠然的好生活。 快来进入互动H5 ··· 在指尖滑动中，
+                  完成拼图互动体验，游边黄陂的卡卡角角，为黄陂的乡村振兴打call。 
+                </p>
+                <span @click='ruleInfoShow=false'>
+                    x
+                </span>
+            </div>
+        </div>
+        <div id=rangking v-if="rangking">
+            <div class="rangking-item">
+               <ul>
+                   <li v-for="i in 50" >{{i}}</li>
+               </ul>
+            </div>   
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/cityInfo.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>
